@@ -18,6 +18,8 @@
 		this.index = 1;
 		this.id = Date.now() + parseInt(Math.random() * 100);		
 
+		this.state = Game.States.NORMAL;
+
 		this.sequence = new Game.Sequence("bullet.png", 2, 20, 14);
 	};
 

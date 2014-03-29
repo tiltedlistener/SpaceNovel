@@ -13,7 +13,8 @@
 			"green.png",
 			"main.png",
 			"planet.png",
-			"red.png"
+			"red.png",
+			"explosion.png"
 			], 
 			loadedImages = {},
 			imageCount = 0,

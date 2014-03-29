@@ -91,7 +91,8 @@
 						current2 = this.objects[curId2];
 
 					// Don't check collisions of background
-					if (!(current.type == Game.Types.BACKGROUND || current2.type == Game.Types.BACKGROUND)) {
+					if (!(current.type == Game.Types.BACKGROUND || current2.type == Game.Types.BACKGROUND) &&
+						 (current.state == Game.States.NORMAL && current2.state == Game.States.NORMAL)) {
 		
 						// Because players can't be hurt by their own torpedos
 						if (!((current.type == Game.Types.PLAYER && current2.type == Game.Types.PROJECTILE) ||

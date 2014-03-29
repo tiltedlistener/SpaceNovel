@@ -7,8 +7,8 @@
 (function($, window, document) {
 	"use strict"; 	
 
-	Game.Enemy = function (image, x, y, width, height, xvec, yvec) {
-		Game.PhysicsActor.call(this, image, x, y, width, height, xvec, yvec);
+	Game.Enemy = function (images, x, y, width, height, xvec, yvec) {
+		Game.PhysicsActor.call(this, images, x, y, width, height, xvec, yvec);
 		this.type = Game.Types.ENEMY;
 	}
 

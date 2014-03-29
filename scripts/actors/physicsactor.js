@@ -7,7 +7,7 @@
 (function($, window, document) {
 	"use strict"; 	
 
-	Game.PhysicsActor = function (image, x, y, width, height, xvec, yvec) {
+	Game.PhysicsActor = function (images, x, y, width, height, xvec, yvec) {
 
 		// State
 		this.state = Game.States.NORMAL;
@@ -17,10 +17,14 @@
 		this.id = Date.now() + parseInt(Math.random() * 100);
 
 		// Graphics
-		if (image !== undefined) {
-			this.image = Game.ImageLibrary.getImage(image);
+		this.imageLib = [];
+		if (images !== undefined && images.length > 0) {
+			for (var i=0, len=images.length;i<len;i++) {
+				this.imageLib.push(Game.ImageLibrary.getImage(images[i]));
+			}
+			this.image = this.imageLib[0];
 		}
-
+ 
 		// Screen functions
 		this.x = x;
 		this.y = y;
@@ -30,12 +34,10 @@
 		if (xvec !== undefined) {
 			this.vec = new Game.Vector(xvec, yvec);
 		}
-
 	};
 
 	// Stubs
 	Game.PhysicsActor.prototype.update = function (gfx, audio) {
-
 		switch(this.state) {
 			case Game.States.NORMAL: 
 				// Degrade forces
@@ -54,11 +56,9 @@
 					this.stop();
 				}
 				break;
-			case Game.States.HIT: 
-				this.destroy();
+			case Game.States.HIT:
 				break;
 		}
-
 		// Draw
 		gfx.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 	};
@@ -102,6 +102,9 @@
 
 	Game.PhysicsActor.prototype.hit = function () {
 		this.state = Game.States.HIT;
+		this.image = this.imageLib[1];
+		var t = this; 
+		setTimeout(function () { t.destroy(); }, 500);
 	};
 
 	Game.PhysicsActor.prototype.destroy = function () {

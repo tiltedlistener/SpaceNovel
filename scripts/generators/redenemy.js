@@ -29,7 +29,7 @@
 
 		(speed > 0) ? speed = speed : speed = 10;
 
-		return new Game.Enemy("red.png", xPos, 0, 89, 114, 0, speed);
+		return new Game.Enemy(["red.png", "explosion.png"], xPos, 0, 89, 114, 0, speed);
 	};
 
 }(jQuery, this, this.document));
