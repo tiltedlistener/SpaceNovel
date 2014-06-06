@@ -14,7 +14,8 @@
 			"main.png",
 			"planet.png",
 			"red.png",
-			"explosion.png"
+			"explosion.png",
+			"space.png"
 			], 
 			loadedImages = {},
 			imageCount = 0,

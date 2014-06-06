@@ -24,11 +24,11 @@
 		this.index = 99;
 		this.id = Date.now() + parseInt(Math.random() * 100);	
 
-
-
 	};
 
-	Game.Background.prototype.update = function(gfx, audio) {
+	Game.Background.prototype.update = function() {};
+
+	Game.Background.prototype.draw = function(gfx, audio) { 
 		gfx.drawImage(this.image, this.x, this.y, this.width, this.height);		
 	};
 

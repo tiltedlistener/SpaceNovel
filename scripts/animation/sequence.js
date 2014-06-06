@@ -40,5 +40,4 @@
 		return this.frameheight * this.currentFrame;
 	};
 
-
 }(jQuery, this, this.document));

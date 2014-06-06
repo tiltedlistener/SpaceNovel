@@ -13,16 +13,15 @@
 			// Boiler plate scene generation
 			var scene = new Game.Scene(gfx, audioStream),
 				obj = new Game.ControlledActor(["blue.png", "explosion.png"], 100, 600, 80, 63, 0, 0),
-				bg = new Game.Background("planet.png", 0, 624, 980, 126);
+				bg = new Game.Background("space.png", 0, 0, 1000, 750);
 			
 			scene.addObject(obj.id, obj);
 			scene.addObject(bg.id, bg);
 			engine.addScene(scene);
 
 			var generator = new Game.RedEnemies(scene);
-			generator.start();
+			// generator.start();
 
-			// Game Start (probably will have controls here to actually start a game scene)
 			engine.tick();
 		}
 
@@ -31,7 +30,6 @@
 		};
 
 	})();
-
 
 	// Start up 
 	$(document).ready(function () {

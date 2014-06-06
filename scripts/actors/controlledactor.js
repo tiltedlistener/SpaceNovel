@@ -48,7 +48,7 @@
 	};
 
 	Game.ControlledActor.prototype.shoot = function () {
-		var projectile = new Game.Torpedo(this.x+this.bulletOffsetX, this.y+this.bulletOffsetY)
+		var projectile = new Game.Torpedo(this.x+this.bulletOffsetX, this.y+this.bulletOffsetY);
 		this.parent.addObject(projectile.id, projectile);
 	};
 

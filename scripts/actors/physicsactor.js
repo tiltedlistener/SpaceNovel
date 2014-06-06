@@ -37,7 +37,7 @@
 	};
 
 	// Stubs
-	Game.PhysicsActor.prototype.update = function (gfx, audio) {
+	Game.PhysicsActor.prototype.update = function () {
 		switch(this.state) {
 			case Game.States.NORMAL: 
 				// Degrade forces
@@ -58,9 +58,11 @@
 				break;
 			case Game.States.HIT:
 				break;
-		}
-		// Draw
-		gfx.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+		}		
+	};
+
+	Game.PhysicsActor.prototype.draw = function (gfx, audio) { 
+		gfx.drawImage(this.image, this.x, this.y, this.width, this.height);
 	};
 
 	Game.PhysicsActor.prototype.applyForce = function (vec) {

@@ -15,8 +15,8 @@
 
 		// Object controllers
 		this.objects = {};
-		this.objectIds = [];
-		this.objectLen = 0;
+		this.objectIds = []; 
+ 	   	this.objectLen = 0;
 
 		// Remove control
 		this.toRemoveObjs = [];
@@ -28,13 +28,21 @@
 
 	Game.Scene.prototype.update = function() {
 		if (!this.activeDeletion && !this.activeCollisionCheck) {
-			this.gfx.ctx.clearRect(0, 0, this.gfx.width, this.gfx.height);
 			for(var i = this.objectLen; i--; ) {
 				var cur = this.objectIds[i];
-				this.objects[cur].update(this.gfx, this.audio);
+				this.objects[cur].update();
 			}
 			this.scheduledDeletion();
 			this.checkForCollisions();
+		}
+	};
+
+	Game.Scene.prototype.draw = function() {
+		if (!this.activeDeletion && !this.activeCollisionCheck) {
+			for(var i = this.objectLen; i--; ) {
+				var cur = this.objectIds[i];
+				this.objects[cur].draw(this.gfx, this.audio);
+			}
 		}
 	};
 
