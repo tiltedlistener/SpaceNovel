@@ -22,7 +22,7 @@
 			var generator = new Game.RedEnemies(scene);
 			// generator.start();
 
-			engine.tick();
+			engine.start();
 		}
 
 		return {
