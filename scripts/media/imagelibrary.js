@@ -1,7 +1,7 @@
 /**
 	Preloads images for objects
 **/
-(function($, window, document) {
+(function(window, document) {
 	"use strict"; 	
 
 	Game.ImageLibrary = (function () {
@@ -63,4 +63,4 @@
 
 	})();
 
-}(jQuery, this, this.document));
+}(this, this.document));

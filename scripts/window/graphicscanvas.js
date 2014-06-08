@@ -1,4 +1,4 @@
-(function($, window, document) {
+(function(window, document) {
 	"use strict"; 	
 
 	Game.GraphicsCanvas = function () {
@@ -14,10 +14,18 @@
 		this.backbufferCtx.drawImage(src, x, y, width, height);
 	};
 
+	Game.GraphicsCanvas.prototype.drawSequenceImage = function (src, xcrop, ycrop, framewidth, frameheight, x, y, framewidthagain, frameheightagain) {
+		this.backbufferCtx.drawImage(src, xcrop, ycrop, framewidth, frameheight, x, y, framewidthagain, frameheightagain);
+	}
+
 	Game.GraphicsCanvas.prototype.updateDisplay = function() {
 		this.ctx.clearRect(0, 0, this.width, this.height);
 		this.ctx.drawImage(this.backbuffer, 0, 0);
 		this.backbufferCtx.clearRect(0, 0, this.width, this.height);
 	};
 
-}(jQuery, this, this.document));
+	Game.GraphicsCanvas.prototype.clearDisplay = function () {
+		this.ctx.clearRect(0, 0, this.width, this.height);
+	};
+
+}(this, this.document));

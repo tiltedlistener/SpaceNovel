@@ -4,7 +4,7 @@
 	when painted in the scene.
 
 **/
-(function($, window, document) {
+(function(window, document) {
 	"use strict"; 	
 
 	Game.ControlledActor = function (images, x, y, width, height, xvec, yvec) {
@@ -55,6 +55,8 @@
 	Game.ControlledActor.prototype.destroy = function () {
 		this.parent.removeObject(this.id);
 		document.removeEventListener('keydown');
+
+		Game.Main.gameEnd();
 	};		
 
-}(jQuery, this, this.document));
+}(this, this.document));

@@ -11,9 +11,9 @@ window.requestAnimFrame = (function(){
 })();
 
 // Set the Game into the window namespace
-(function($, window, document) {
+(function(window, document) {
 	"use strict"; 	
 
 	window.Game = {};
 
-}(jQuery, this, this.document));
+}(this, this.document));

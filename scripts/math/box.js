@@ -1,4 +1,4 @@
-(function($, window, document) {
+(function(window, document) {
 	"use strict"; 	
 
 	Game.Box = function (x, y, width, height) {
@@ -17,4 +17,4 @@
 		return true; 
 	};
 
-}(jQuery, this, this.document));
+}(this, this.document));

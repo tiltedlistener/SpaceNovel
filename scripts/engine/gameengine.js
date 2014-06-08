@@ -1,4 +1,4 @@
-(function($, window, document) {
+(function(window, document) {
 	"use strict"; 	
 
 	Game.Engine = function (gfx) {
@@ -13,14 +13,17 @@
 		this.playAnim = false;
 		
 		// Frame update controllers
+		this.TARGET_HRZ = 80;
+		this.TIME_BETWEEN_UPDATES = 1000 / this.TARGET_HRZ;
 		this.MAX_UPDATES_BEFORE_RENDER = 5;
-		this.TARGET_FPS = 60;
-		this.TARGET_TIME_BETWEEN_RENDERS = 1000 / this.TARGET_FPS;
 
 		this.lastUpdateTime = 0;
 		this.lastRenderTime = 0;
 		this.fps = 0;
 		this.frameCount = 0;
+		this.lastSecondTime  = 0;
+
+		this.loopComplete = true;
 	};
 
 	Game.Engine.prototype.addScene = function (scene) {
@@ -39,59 +42,46 @@
    }
     Game.Engine.prototype.start = function () {
     	this.playAnim = true;
+    	this.lastUpdateTime = this.lastRenderTime = new Date().getTime();
     	this.tick();
     }; 
 
     Game.Engine.prototype.stop = function () {
     	this.playAnim = false;
+    	this.gfx.clearDisplay();
     };
 
 	Game.Engine.prototype.loop = function () {
-		this.lastUpdateTime = this.lastRenderTime = new Date().getTime();
+		if (this.loopComplete) {
+			this.loopComplete = false;
+			var now = new Date().getTime();
+			var updateCount = 0;
 
-		/**
-		var now = new Date().getTime();
-		var updateCount = 0;
+			// Update!
+			while(now - this.lastUpdateTime > this.TIME_BETWEEN_UPDATES && updateCount < this.MAX_UPDATES_BEFORE_RENDER) {
+				this.scene.update();
+				this.lastUpdateTime += this.TIME_BETWEEN_UPDATES;
+				updateCount++;
+			}
 
-		// Update!
+	        // Draw!
+	        var interpolation = Math.min((now - this.lastUpdateTime) / this.TIME_BETWEEN_UPDATES);
+	        this.scene.draw(interpolation);
+	        this.gfx.updateDisplay();
+	        this.frameCount++;
+	        this.lastRenderTime = now;
 
-		while(now - this.lastUpdateTime > this.TIME_BETWEEN_UPDATES && updateCount < this.MAX_UPDATES_BEFORE_RENDER) {
-			this.scene.update();
-			this.lastUpdateTime += this.TIME_BETWEEN_UPDATES;
-			updateCount++;
-			console.log("UPDATING");
-		}
-
-
-
-		/**
-		if (now - this.lastUpdateTime > this.TIME_BETWEEN_UPDATES) {
-           this.lastUpdateTime = now - this.TIME_BETWEEN_UPDATES;
-        }
-
-        // Draw!
-        var interpolation = Math.min((now - this.lastUpdateTime) / this.TIME_BETWEEN_UPDATES);
-        this.scene.draw(interpolation);
-        this.gfx.updateDisplay();
-        this.frameCount++;
-        this.lastRenderTime = now;
-
-
+	        // Fetch the FPS rate
 			var thisSecond = this.lastUpdateTime / 1000;
-        if (thisSecond > this.lastSecondTime)
-        {
-           this.fps = this.frameCount;
-           this.frameCount = 0;
-           this.lastSecondTime = thisSecond;
+	        if (thisSecond > this.lastSecondTime) {
+	           this.fps = this.frameCount;
+	           this.frameCount = 0;
+	           this.lastSecondTime = thisSecond;
+	        } 
+        	this.loopComplete = true;
         }
-     
-        //Yield until it has been at least the target time between renders. This saves the CPU from hogging.
-        while (now - this.lastRenderTime < this.TARGET_TIME_BETWEEN_RENDERS && now - this.lastUpdateTime < this.TIME_BETWEEN_UPDATES) {            
-           now = new Date().getTime();
-        }
-        **/
 
 	};
 
 
-}(jQuery, this, this.document));
+}(this, this.document));

@@ -1,10 +1,20 @@
-(function($, window, document) {
+(function(window, document) {
 	"use strict"; 	
 
 	Game.Main = (function () {
 
+		var startPage,
+			endPage;
+
 		function init() {
-			
+			startPage = document.getElementById("start-page");
+			endPage = document.getElementById("end-page")
+			startPage.addEventListener('click', gameStart, false);
+		}
+
+		function gameStart() {		
+			startPage.style.opacity = 0;
+
 			// Start the game tech
 			var gfx = new Game.GraphicsCanvas(),
 				audioStream = new Game.AudioStream(),
@@ -12,28 +22,34 @@
 
 			// Boiler plate scene generation
 			var scene = new Game.Scene(gfx, audioStream),
-				obj = new Game.ControlledActor(["blue.png", "explosion.png"], 100, 600, 80, 63, 0, 0),
-				bg = new Game.Background("space.png", 0, 0, 1000, 750);
-			
+				obj = new Game.ControlledActor(["blue.png", "explosion.png"], 460, 550, 80, 63, 0, 0),
+				level = new Game.Level(10, scene, obj);
+
 			scene.addObject(obj.id, obj);
-			scene.addObject(bg.id, bg);
+			scene.addLevel(level);
 			engine.addScene(scene);
 
 			var generator = new Game.RedEnemies(scene);
-			// generator.start();
+			generator.start();
 
 			engine.start();
 		}
 
+		function gameEnd() {
+			endPage.style.opacity = 1;
+			startPage.removeEventListener('click', gameStart);
+		}
+
 		return {
-			init: init
+			init: init,
+			gameEnd: gameEnd
 		};
 
 	})();
 
 	// Start up 
-	$(document).ready(function () {
+	window.onload = function () {
 		Game.ImageLibrary.init(Game.Main.init);
-	});
+	};
 
-}(jQuery, this, this.document));
+}(this, this.document));

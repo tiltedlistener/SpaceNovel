@@ -5,7 +5,7 @@
 	The scene is handed GFX and a Sound Player to run its media
 	
 **/
-(function($, window, document) {
+(function(window, document) {
 	"use strict"; 	
 
 	Game.Scene= function (gfx, audio) {
@@ -17,6 +17,9 @@
 		this.objects = {};
 		this.objectIds = []; 
  	   	this.objectLen = 0;
+
+ 	   	// Level
+ 	 	this.currentLevel = null;
 
 		// Remove control
 		this.toRemoveObjs = [];
@@ -37,13 +40,25 @@
 		}
 	};
 
-	Game.Scene.prototype.draw = function() {
+	Game.Scene.prototype.draw = function(interpolation) {
 		if (!this.activeDeletion && !this.activeCollisionCheck) {
 			for(var i = this.objectLen; i--; ) {
 				var cur = this.objectIds[i];
-				this.objects[cur].draw(this.gfx, this.audio);
+				this.objects[cur].draw(this.gfx, this.audio, interpolation);
 			}
 		}
+	};
+
+	Game.Scene.prototype.addLevel = function(level) {
+		this.currentLevel = level;
+	};
+
+	Game.Scene.prototype.clearLevel = function () {
+		this.currentLevel = null;
+	};
+
+	Game.Scene.prototype.endLevel = function () {
+		Game.Main.gameEnd();
 	};
 
 	Game.Scene.prototype.addObject = function(id, obj) {
@@ -126,4 +141,4 @@
 		this.activeCollisionCheck = false;
 	};
 
-}(jQuery, this, this.document));
+}(this, this.document));

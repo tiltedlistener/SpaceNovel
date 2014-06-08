@@ -4,7 +4,7 @@
 	It may go wherever within a scene's position index
 
 **/
-(function($, window, document) {
+(function(window, document) {
 	"use strict"; 	
 
 	Game.Background = function (image, x, y, width, height) {
@@ -28,6 +28,7 @@
 
 	Game.Background.prototype.update = function() {};
 
+	// Note we ignore interpolation here. Probably won't hold for scrolling backgrounds
 	Game.Background.prototype.draw = function(gfx, audio) { 
 		gfx.drawImage(this.image, this.x, this.y, this.width, this.height);		
 	};
@@ -36,4 +37,4 @@
 		this.parent = obj;
 	};	
 
-}(jQuery, this, this.document));
+}(this, this.document));

@@ -1,8 +1,8 @@
-(function($, window, document) {
+(function(window, document) {
 	"use strict"; 	
 
 	Game.AudioStream = function () {
 
 	};
 
-}(jQuery, this, this.document));
+}(this, this.document));

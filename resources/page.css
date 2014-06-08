@@ -6,13 +6,55 @@ html, body {
 	font-size:100%;
 }
 
+body {
+	background: black;
+}
+
 canvas {
-	background:black;
+	border:1px solid red;
 }
 
 #wrapper {
-	margin:0 auto;
+	margin:50px auto;
+	position:relative;
 	width:1000px;
+}
+
+#background {
+	position:absolute;
+	left:0px;
+	top:0px;
+	z-index: -100;
+}
+
+#end-page,
+#start-page {
+	cursor:pointer;
+
+	opacity:1.0;
+	-webkit-transition:opacity 1s;
+	position:absolute;
+	left:0px;
+	top:0px;
+	z-index: 100;
+}
+
+#start-page img {
+	margin-left:50px;
+}
+
+#start {
+	position: absolute;
+	color: orange;
+	font-family: sans-serif;
+	font-size: 40px;
+	left: 350px;
+	top: 530px;
+}
+
+#end-page {
+	opacity:0.0;
+	z-index: 99;
 }
 
 #backbuffer {

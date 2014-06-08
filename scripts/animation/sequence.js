@@ -1,4 +1,4 @@
-(function($, window, document) {
+(function(window, document) {
 	"use strict"; 	
 
 	Game.Sequence = function (img, count, framewidth, frameheight) {
@@ -40,4 +40,4 @@
 		return this.frameheight * this.currentFrame;
 	};
 
-}(jQuery, this, this.document));
+}(this, this.document));

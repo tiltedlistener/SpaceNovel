@@ -1,4 +1,4 @@
-(function($, window, document) {
+(function(window, document) {
 	"use strict"; 	
 
 	Game.Types = {
@@ -13,4 +13,4 @@
 		HIT: 1,
 	};	
 
-}(jQuery, this, this.document));
+}(this, this.document));

@@ -1,4 +1,4 @@
-(function($, window, document) {
+(function(window, document) {
 	"use strict"; 	
 
 	Game.Vector = function (x, y) {
@@ -23,4 +23,4 @@
 		return new Game.Vector(this.x, this.y);
 	}
 
-}(jQuery, this, this.document));
+}(this, this.document));

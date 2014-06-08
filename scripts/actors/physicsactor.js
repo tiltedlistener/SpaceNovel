@@ -4,7 +4,7 @@
 	It is not only drawn but can be touched.
 
 **/
-(function($, window, document) {
+(function(window, document) {
 	"use strict"; 	
 
 	Game.PhysicsActor = function (images, x, y, width, height, xvec, yvec) {
@@ -28,6 +28,9 @@
 		// Screen functions
 		this.x = x;
 		this.y = y;
+		this.lastX = x;
+		this.lastY = y;
+
 		this.width = width;
 		this.height = height;
 
@@ -43,6 +46,10 @@
 				// Degrade forces
 				this.applyFriction();
 
+				// REMEMBER!
+				this.lastX = this.x;
+				this.lastY = this.y;
+
 				// Apply any force
 				this.x += this.vec.x;
 				this.y += this.vec.y;
@@ -57,12 +64,13 @@
 				}
 				break;
 			case Game.States.HIT:
+				// Interpolation is causing explosion images to get gittery. I like the effect for the moment. 
 				break;
 		}		
 	};
 
-	Game.PhysicsActor.prototype.draw = function (gfx, audio) { 
-		gfx.drawImage(this.image, this.x, this.y, this.width, this.height);
+	Game.PhysicsActor.prototype.draw = function (gfx, audio, interpolation) { 
+		gfx.drawImage(this.image, (this.x - this.lastX) * interpolation + this.lastX , (this.y - this.lastY) * interpolation + this.lastY, this.width, this.height);
 	};
 
 	Game.PhysicsActor.prototype.applyForce = function (vec) {
@@ -113,4 +121,4 @@
 		this.parent.removeObject(this.id);
 	};	
 
-}(jQuery, this, this.document));
+}(this, this.document));
