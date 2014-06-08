@@ -7,4 +7,4 @@ Space novel follows are hero - the blue ship - as he shoots at the red, green an
 
 ## Motivation
 
-The intent of the project is to take a seemingly simple game, and attempt to steadily grow the player to large amounts of complexity in enemy behavior, player options, and resource management. 
+The intent of the project is to take a seemingly simple game, and attempt to steadily grow the player higher amounts of complexity in enemy behavior, player options, and resource management despite its visual simplicity. 
